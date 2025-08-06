@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Taller Game On!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neon-pink': '#ff6ec7',
+                        'neon-blue': '#00f0ff',
+                        'neon-green': '#39ff14',
+                        'dark-purple': '#1a0933',
+                    },
+                    fontFamily: {
+                        'press-start': ['"Press Start 2P"', 'cursive'],
+                        'orbitron': ['Orbitron', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        .qr-placeholder {
+            background: repeating-linear-gradient(
+                45deg,
+                #2d3748,
+                #2d3748 10px,
+                #4a5568 10px,
+                #4a5568 20px
+            );
+        }
+    </style>
+</head>
+<body class="bg-dark-purple text-white font-sans">
+    
+    <!-- Slide de Título -->
+    <div class="min-h-screen flex flex-col items-center justify-center p-8 bg-gradient-to-br from-purple-900 to-blue-900">
+        <h1 class="text-6xl md:text-8xl font-press-start mb-8 text-neon-pink text-center">
+            🎮 GAME ON!
+        </h1>
+        <h2 class="text-3xl md:text-4xl font-orbitron text-neon-blue mb-12 text-center">
+            Videojuegos como Herramienta Educativa
+        </h2>
+    </div>
+
+    <!-- FASE 1: Rompehielos -->
+    <div class="min-h-screen flex flex-col items-center justify-center p-8 bg-gradient-to-br from-indigo-900 to-purple-800">
+        <div class="text-center mb-12">
+            <span class="inline-block px-4 py-2 bg-neon-green text-black font-bold rounded-full mb-4">
+                FASE 1
+            </span>
+            <h2 class="text-5xl md:text-6xl font-press-start text-neon-blue mb-4">
+                ROMPEHIELOS GAMIFICADO
+            </h2>
+            <p class="text-2xl text-neon-pink font-orbitron">15 minutos</p>
+        </div>
+
+        <!-- Espacio para QR -->
+        <div class="mt-12 p-6 bg-black bg-opacity-70 rounded-lg border-2 border-dashed border-neon-blue flex flex-col items-center">
+            <div class="w-48 h-48 qr-placeholder flex items-center justify-center mb-4">
+                <!-- Espacio para tu QR -->
+                <span class="text-gray-400 text-sm">[QR FASE 1]</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- FASE 2: Desmitificando -->
+    <div class="min-h-screen flex flex-col items-center justify-center p-8 bg-gradient-to-br from-blue-900 to-green-900">
+        <div class="text-center mb-12">
+            <span class="inline-block px-4 py-2 bg-neon-pink text-black font-bold rounded-full mb-4">
+                FASE 2
+            </span>
+            <h2 class="text-5xl md:text-6xl font-press-start text-neon-green mb-4">
+                DESMITIFICANDO LOS VIDEOJUEGOS
+            </h2>
+            <p class="text-2xl text-neon-blue font-orbitron">20 minutos</p>
+        </div>
+
+        <!-- Espacio para QR -->
+        <div class="mt-12 p-6 bg-black bg-opacity-70 rounded-lg border-2 border-dashed border-neon-pink flex flex-col items-center">
+            <div class="w-48 h-48 qr-placeholder flex items-center justify-center mb-4">
+                <!-- Espacio para tu QR -->
+                <span class="text-gray-400 text-sm">[QR FASE 2]</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- FASE 4: Design Thinking -->
+    <div class="min-h-screen flex flex-col items-center justify-center p-8 bg-gradient-to-br from-purple-900 to-pink-700">
+        <div class="text-center mb-12">
+            <span class="inline-block px-4 py-2 bg-neon-blue text-black font-bold rounded-full mb-4">
+                FASE 4
+            </span>
+            <h2 class="text-5xl md:text-6xl font-press-start text-neon-pink mb-4">
+                DESIGN THINKING GAMIFICADO
+            </h2>
+            <p class="text-2xl text-neon-green font-orbitron">25 minutos</p>
+        </div>
+
+        <!-- Espacio para QR -->
+        <div class="mt-12 p-6 bg-black bg-opacity-70 rounded-lg border-2 border-dashed border-neon-green flex flex-col items-center">
+            <div class="w-48 h-48 qr-placeholder flex items-center justify-center mb-4">
+                <!-- Espacio para tu QR -->
+                <span class="text-gray-400 text-sm">[QR FASE 4]</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- FASE 5: Showcase -->
+    <div class="min-h-screen flex flex-col items-center justify-center p-8 bg-gradient-to-br from-green-900 to-yellow-600">
+        <div class="text-center mb-12">
+            <span class="inline-block px-4 py-2 bg-neon-pink text-black font-bold rounded-full mb-4">
+                FASE 5
+            </span>
+            <h2 class="text-5xl md:text-6xl font-press-start text-neon-blue mb-4">
+                SHOWCASE Y REFLEXIÓN
+            </h2>
+            <p class="text-2xl text-neon-green font-orbitron">20 minutos</p>
+        </div>
+
+        <!-- Espacio para QR -->
+        <div class="mt-12 p-6 bg-black bg-opacity-70 rounded-lg border-2 border-dashed border-neon-pink flex flex-col items-center">
+            <div class="w-48 h-48 qr-placeholder flex items-center justify-center mb-4">
+                <!-- Espacio para tu QR -->
+                <span class="text-gray-400 text-sm">[QR FASE 5]</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
