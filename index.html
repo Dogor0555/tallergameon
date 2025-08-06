@@ -13,88 +13,258 @@
                         'scratch-orange': '#FF8C1A',
                         'scratch-blue': '#4D97FF',
                         'scratch-dark': '#0F1C3F',
+                        'team-mito': '#FF6B6B',
+                        'team-realidad': '#4ECDC4',
                     },
                     fontFamily: {
                         'game-font': '"Orbitron", sans-serif',
                     },
+                    animation: {
+                        'bounce-slow': 'bounce 2s infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-in': 'slideIn 1s ease-out',
+                        'fade-in': 'fadeIn 1.5s ease-in',
+                        'rotate-slow': 'spin 8s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 20px #FF8C1A' },
+                            '100%': { boxShadow: '0 0 30px #4D97FF, 0 0 40px #4D97FF' }
+                        },
+                        slideIn: {
+                            '0%': { transform: 'translateX(-100%)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        }
+                    }
                 }
             }
         }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #FF8C1A;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .hover-scale {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+        
+        .interactive-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+        
+        .interactive-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 140, 26, 0.3);
+        }
+        
+        .glitch-effect {
+            position: relative;
+        }
+        
+        .glitch-effect:hover::before,
+        .glitch-effect:hover::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+        }
+        
+        .glitch-effect:hover::before {
+            animation: glitch 0.3s infinite;
+            color: #FF6B6B;
+            z-index: -1;
+        }
+        
+        .glitch-effect:hover::after {
+            animation: glitch 0.3s infinite reverse;
+            color: #4ECDC4;
+            z-index: -2;
+        }
+        
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        
+        .typing-animation {
+            overflow: hidden;
+            border-right: 3px solid #FF8C1A;
+            white-space: nowrap;
+            animation: typing 3s steps(30, end), blink-caret 0.5s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #FF8C1A }
+        }
+    </style>
 </head>
-<body class="bg-scratch-dark text-white font-game-font">
+<body class="bg-scratch-dark text-white font-game-font overflow-x-hidden">
+    
+    <!-- Partículas de fondo -->
+    <div id="particles-container" class="fixed inset-0 pointer-events-none z-0"></div>
 
     <!-- Portada -->
-    <div class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-scratch-dark to-gray-900 p-6">
-        <h1 class="text-5xl md:text-7xl font-bold text-scratch-orange mb-4 text-center">
+    <div class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-scratch-dark to-gray-900 p-6 relative z-10">
+        <h1 class="text-5xl md:text-7xl font-bold text-scratch-orange mb-4 text-center animate-bounce-slow glitch-effect" data-text="🎮 GAME ON!">
             🎮 GAME ON!
         </h1>
-        <h2 class="text-2xl md:text-3xl text-scratch-blue mb-8 text-center">
+        <h2 class="text-2xl md:text-3xl text-scratch-blue mb-8 text-center animate-fade-in typing-animation" style="animation-delay: 1s;">
             Videojuegos como Herramienta Educativa
         </h2>
-        <div class="flex gap-4">
-            <span class="px-4 py-2 bg-scratch-orange text-black rounded-full">1h 50min</span>
-            <span class="px-4 py-2 bg-scratch-blue text-black rounded-full">50 docentes</span>
-        </div>
-    </div>
-
-    <!-- FASE 1: Rompehielos -->
-    <div class="min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-br from-scratch-dark to-blue-900">
-        <div class="text-center mb-8">
-            <span class="inline-block px-4 py-1 bg-scratch-orange text-black rounded-full mb-2">
-                FASE 1
-            </span>
-            <h2 class="text-4xl md:text-5xl font-bold text-scratch-blue mb-2">
-                ROMPEHIELOS GAMIFICADO
-            </h2>
-            <p class="text-xl text-scratch-orange">15 minutos</p>
+        <div class="flex gap-4 animate-slide-in" style="animation-delay: 2s;">
+            <span class="px-4 py-2 bg-scratch-orange text-black rounded-full hover-scale animate-glow cursor-pointer" onclick="showTooltip(this, '110 minutos de pura diversión educativa')">1h 50min</span>
+            <span class="px-4 py-2 bg-scratch-blue text-black rounded-full hover-scale animate-glow cursor-pointer" onclick="showTooltip(this, 'Capacidad para 50 docentes innovadores')" style="animation-delay: 0.5s;">50 docentes</span>
         </div>
         
-        <!-- Espacio QR -->
-        <div class="mt-8 border-2 border-dashed border-scratch-blue p-4 rounded-lg">
-            <div class="w-40 h-40 bg-gray-800 flex items-center justify-center">
-                <p class="text-gray-400 text-sm">[QR ACTIVIDAD]</p>
+        <!-- Botón de scroll animado -->
+        <div class="absolute bottom-8 animate-bounce cursor-pointer" onclick="scrollToNext()">
+            <div class="w-6 h-10 border-2 border-scratch-orange rounded-full flex justify-center">
+                <div class="w-1 h-3 bg-scratch-orange rounded-full mt-2 animate-pulse"></div>
             </div>
         </div>
     </div>
 
-    <!-- FASE 2: Desmitificando -->
-    <div class="min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-br from-blue-900 to-scratch-dark">
-        <div class="text-center mb-8">
-            <span class="inline-block px-4 py-1 bg-scratch-blue text-black rounded-full mb-2">
-                FASE 2
+    <!-- FASE 1: Rompehielos -->
+    <div class="min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-br from-scratch-dark to-blue-900 relative z-10" id="fase1">
+        <div class="text-center mb-8 animate-fade-in">
+            <span class="inline-block px-4 py-1 bg-scratch-orange text-black rounded-full mb-2 animate-pulse-slow">
+                FASE 1
             </span>
-            <h2 class="text-4xl md:text-5xl font-bold text-scratch-orange mb-2">
-                DESMITIFICANDO VIDEOJUEGOS
+            <h2 class="text-4xl md:text-5xl font-bold text-scratch-blue mb-2 animate-float">
+                ROMPEHIELOS GAMIFICADO
             </h2>
-            <p class="text-xl text-scratch-blue">20 minutos</p>
+            <p class="text-xl text-scratch-orange animate-bounce-slow" style="animation-delay: 1s;">15 minutos</p>
         </div>
         
-        <!-- Espacio QR -->
-        <div class="mt-8 border-2 border-dashed border-scratch-orange p-4 rounded-lg">
-            <div class="w-40 h-40 bg-gray-800 flex items-center justify-center">
-                <p class="text-gray-400 text-sm">[QR ACTIVIDAD]</p>
+        <!-- Espacio QR con efectos interactivos -->
+        <div class="mt-8 border-2 border-dashed border-scratch-blue p-4 rounded-lg interactive-card hover-scale" onclick="activateQR(this)">
+            <div class="w-40 h-40 bg-gray-800 flex items-center justify-center rounded-lg relative overflow-hidden">
+                <img src="qr1.png" alt="QR Actividad 1" class="w-full h-full object-contain transition-all duration-500 hover:scale-110">
+                <div class="absolute inset-0 bg-scratch-blue opacity-0 hover:opacity-10 transition-opacity duration-300"></div>
+            </div>
+            <p class="text-center mt-2 text-sm text-scratch-blue opacity-70">Click para activar</p>
+        </div>
+    </div>
+
+    <!-- FASE 2: Desmitificando + Debate Relámpago -->
+    <div class="min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-br from-blue-900 to-scratch-dark relative z-10" id="fase2">
+        <div class="text-center mb-8 animate-fade-in">
+            <span class="inline-block px-4 py-1 bg-scratch-blue text-black rounded-full mb-2 animate-pulse-slow">
+                FASE 2
+            </span>
+            <h2 class="text-4xl md:text-5xl font-bold text-scratch-orange mb-2 animate-float">
+                DESMITIFICANDO VIDEOJUEGOS
+            </h2>
+            <p class="text-xl text-scratch-blue animate-bounce-slow" style="animation-delay: 1s;">20 minutos</p>
+        </div>
+
+        <!-- Sección Debate Relámpago -->
+        <div class="max-w-2xl w-full mb-8 bg-black bg-opacity-50 p-6 rounded-lg border-2 border-scratch-orange interactive-card animate-slide-in">
+            <h3 class="text-2xl text-center font-bold text-scratch-blue mb-4 animate-glow">
+                🎯 ACTIVIDAD 3: "DEBATE RELÁMPAGO" (12 min)
+            </h3>
+            
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <div class="bg-team-mito bg-opacity-20 p-4 rounded-lg border-2 border-team-mito interactive-card" onclick="selectTeam('mito', this)">
+                    <h4 class="text-lg font-bold text-team-mito mb-2 animate-pulse">TEAM MITO</h4>
+                    <p class="text-sm">Defiende creencias populares</p>
+                    <div class="mt-2 text-xs opacity-70">👥 <span id="mito-count">0</span> miembros</div>
+                </div>
+                <div class="bg-team-realidad bg-opacity-20 p-4 rounded-lg border-2 border-team-realidad interactive-card" onclick="selectTeam('realidad', this)">
+                    <h4 class="text-lg font-bold text-team-realidad mb-2 animate-pulse" style="animation-delay: 0.5s;">TEAM REALIDAD</h4>
+                    <p class="text-sm">Argumenta con evidencia científica</p>
+                    <div class="mt-2 text-xs opacity-70">👥 <span id="realidad-count">0</span> miembros</div>
+                </div>
+            </div>
+            
+            <h4 class="text-lg font-bold text-scratch-orange mb-2 animate-glow">Afirmaciones polémicas:</h4>
+            <ul class="space-y-3 mb-6">
+                <li class="flex items-start interactive-card p-2 rounded hover:bg-gray-700" onclick="toggleStatement(this)">
+                    <span class="inline-block w-2 h-2 bg-scratch-orange mt-2 mr-2 animate-pulse"></span>
+                    "Los videojuegos mejoran la cirugía médica"
+                    <span class="ml-auto text-xs opacity-0 transition-opacity">✓</span>
+                </li>
+                <li class="flex items-start interactive-card p-2 rounded hover:bg-gray-700" onclick="toggleStatement(this)">
+                    <span class="inline-block w-2 h-2 bg-scratch-orange mt-2 mr-2 animate-pulse" style="animation-delay: 0.3s;"></span>
+                    "Minecraft enseña mejor geometría que los libros"
+                    <span class="ml-auto text-xs opacity-0 transition-opacity">✓</span>
+                </li>
+                <li class="flex items-start interactive-card p-2 rounded hover:bg-gray-700" onclick="toggleStatement(this)">
+                    <span class="inline-block w-2 h-2 bg-scratch-orange mt-2 mr-2 animate-pulse" style="animation-delay: 0.6s;"></span>
+                    "Los gamers tienen mejor coordinación mano-ojo"
+                    <span class="ml-auto text-xs opacity-0 transition-opacity">✓</span>
+                </li>
+            </ul>
+            
+            <div class="bg-gray-800 p-3 rounded-lg animate-glow">
+                <p class="text-sm text-center text-scratch-blue">
+                    <span class="font-bold">Dinámica:</span> 30 segundos por ronda → Cambio de lados → Revelación científica
+                </p>
+            </div>
+            
+            <!-- Cronómetro interactivo -->
+            <div class="mt-4 text-center">
+                <button onclick="startDebateTimer()" class="px-4 py-2 bg-scratch-orange text-black rounded-full hover-scale animate-bounce-slow">
+                    ⏱️ Iniciar Cronómetro
+                </button>
+                <div id="timer-display" class="mt-2 text-2xl font-bold text-scratch-blue opacity-0 transition-opacity">
+                    00:30
+                </div>
             </div>
         </div>
     </div>
 
     <!-- FASE 4: Design Thinking + SCRATCH -->
-    <div class="min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-br from-scratch-dark to-purple-900">
-        <div class="text-center mb-8">
-            <span class="inline-block px-4 py-1 bg-scratch-orange text-black rounded-full mb-2">
+    <div class="min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-br from-scratch-dark to-purple-900 relative z-10" id="fase4">
+        <div class="text-center mb-8 animate-fade-in">
+            <span class="inline-block px-4 py-1 bg-scratch-orange text-black rounded-full mb-2 animate-pulse-slow">
                 FASE 4
             </span>
-            <h2 class="text-4xl md:text-5xl font-bold text-scratch-blue mb-2">
+            <h2 class="text-4xl md:text-5xl font-bold text-scratch-blue mb-2 animate-float">
                 DESIGN THINKING GAMIFICADO
             </h2>
-            <p class="text-xl text-scratch-orange">25 minutos</p>
+            <p class="text-xl text-scratch-orange animate-bounce-slow" style="animation-delay: 1s;">25 minutos</p>
         </div>
         
         <!-- Sección SCRATCH con tu iframe -->
-        <div class="bg-black bg-opacity-50 p-6 rounded-lg border-2 border-scratch-blue max-w-2xl w-full mb-8">
-            <h3 class="text-2xl text-scratch-orange mb-4 text-center">🐱 PRÁCTICA CON SCRATCH</h3>
-            <div class="bg-gray-800 p-4 rounded-lg flex justify-center">
+        <div class="bg-black bg-opacity-50 p-6 rounded-lg border-2 border-scratch-blue max-w-2xl w-full mb-8 interactive-card animate-slide-in">
+            <h3 class="text-2xl text-scratch-orange mb-4 text-center animate-glow">🐱 PRÁCTICA CON SCRATCH</h3>
+            <div class="bg-gray-800 p-4 rounded-lg flex justify-center relative">
                 <iframe 
                     src="https://scratch.mit.edu/projects/1196450202/embed" 
                     allowtransparency="true" 
@@ -103,18 +273,243 @@
                     frameborder="0" 
                     scrolling="no" 
                     allowfullscreen
-                    class="rounded-lg shadow-lg"
+                    class="rounded-lg shadow-lg hover-scale transition-all duration-500"
                 ></iframe>
+                
+                <!-- Overlay de carga simulado -->
+                <div id="scratch-loading" class="absolute inset-0 bg-black bg-opacity-80 flex items-center justify-center rounded-lg opacity-0 transition-opacity pointer-events-none">
+                    <div class="text-center">
+                        <div class="animate-spin w-8 h-8 border-4 border-scratch-orange border-t-transparent rounded-full mx-auto mb-2"></div>
+                        <p class="text-scratch-orange">Cargando Scratch...</p>
+                    </div>
+                </div>
             </div>
-        </div>
-        
-        <!-- Espacio QR -->
-        <div class="mt-4 border-2 border-dashed border-scratch-blue p-4 rounded-lg">
-            <div class="w-40 h-40 bg-gray-800 flex items-center justify-center">
-                <p class="text-gray-400 text-sm">[QR ACTIVIDAD]</p>
+            
+            <!-- Controles interactivos para Scratch -->
+            <div class="mt-4 flex justify-center gap-2">
+                <button onclick="showScratchTip('variables')" class="px-3 py-1 bg-scratch-blue text-xs rounded-full hover-scale">
+                    💡 Variables
+                </button>
+                <button onclick="showScratchTip('eventos')" class="px-3 py-1 bg-scratch-orange text-xs rounded-full hover-scale">
+                    ⚡ Eventos
+                </button>
+                <button onclick="showScratchTip('control')" class="px-3 py-1 bg-purple-600 text-xs rounded-full hover-scale">
+                    🔄 Control
+                </button>
+            </div>
+            
+            <!-- Tooltip para tips de Scratch -->
+            <div id="scratch-tooltip" class="mt-2 p-3 bg-gray-700 rounded-lg opacity-0 transition-opacity text-sm">
+                <p class="text-center">Selecciona un tema para ver consejos útiles</p>
             </div>
         </div>
     </div>
+
+    <!-- Tooltip flotante -->
+    <div id="floating-tooltip" class="fixed bg-black text-white p-2 rounded shadow-lg pointer-events-none opacity-0 transition-opacity z-50 text-sm">
+    </div>
+
+    <script>
+        // Sistema de partículas de fondo
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                particle.style.animationDuration = (3 + Math.random() * 4) + 's';
+                container.appendChild(particle);
+                
+                // Animación de partícula flotante
+                particle.style.animation = `float ${3 + Math.random() * 4}s ease-in-out infinite`;
+            }
+        }
+
+        // Tooltip interactivo
+        function showTooltip(element, text) {
+            const tooltip = document.getElementById('floating-tooltip');
+            tooltip.textContent = text;
+            tooltip.style.opacity = '1';
+            
+            const rect = element.getBoundingClientRect();
+            tooltip.style.left = rect.left + (rect.width / 2) - (tooltip.offsetWidth / 2) + 'px';
+            tooltip.style.top = rect.top - tooltip.offsetHeight - 10 + 'px';
+            
+            setTimeout(() => {
+                tooltip.style.opacity = '0';
+            }, 2000);
+        }
+
+        // Scroll suave a la siguiente sección
+        function scrollToNext() {
+            document.getElementById('fase1').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Activar QR con efectos visuales
+        function activateQR(element) {
+            element.style.transform = 'scale(1.1)';
+            element.style.boxShadow = '0 0 30px #4D97FF';
+            
+            // Crear efecto de ondas
+            const ripple = document.createElement('div');
+            ripple.style.position = 'absolute';
+            ripple.style.inset = '0';
+            ripple.style.border = '3px solid #FF8C1A';
+            ripple.style.borderRadius = '10px';
+            ripple.style.animation = 'ping 1s cubic-bezier(0, 0, 0.2, 1)';
+            element.appendChild(ripple);
+            
+            setTimeout(() => {
+                element.style.transform = '';
+                element.style.boxShadow = '';
+                ripple.remove();
+            }, 1000);
+        }
+
+        // Selección de equipos con contadores
+        let mitoCount = 0;
+        let realidadCount = 0;
+
+        function selectTeam(team, element) {
+            if (team === 'mito') {
+                mitoCount++;
+                document.getElementById('mito-count').textContent = mitoCount;
+            } else {
+                realidadCount++;
+                document.getElementById('realidad-count').textContent = realidadCount;
+            }
+            
+            // Efecto visual de selección
+            element.style.transform = 'scale(1.05)';
+            element.style.filter = 'brightness(1.2)';
+            
+            setTimeout(() => {
+                element.style.transform = '';
+                element.style.filter = '';
+            }, 500);
+        }
+
+        // Toggle de afirmaciones
+        function toggleStatement(element) {
+            const checkmark = element.querySelector('span:last-child');
+            if (checkmark.style.opacity === '1') {
+                checkmark.style.opacity = '0';
+                element.style.backgroundColor = '';
+            } else {
+                checkmark.style.opacity = '1';
+                element.style.backgroundColor = 'rgba(77, 151, 255, 0.1)';
+            }
+        }
+
+        // Cronómetro de debate
+        let debateTimer = null;
+        
+        function startDebateTimer() {
+            const display = document.getElementById('timer-display');
+            const button = event.target;
+            let seconds = 30;
+            
+            display.style.opacity = '1';
+            button.disabled = true;
+            button.textContent = '⏱️ En progreso...';
+            
+            debateTimer = setInterval(() => {
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                display.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                
+                if (seconds <= 5) {
+                    display.style.color = '#FF6B6B';
+                    display.style.animation = 'pulse 0.5s infinite';
+                }
+                
+                seconds--;
+                
+                if (seconds < 0) {
+                    clearInterval(debateTimer);
+                    display.textContent = '¡TIEMPO!';
+                    display.style.color = '#FF8C1A';
+                    display.style.animation = 'bounce 1s infinite';
+                    button.disabled = false;
+                    button.textContent = '🔄 Reiniciar';
+                    
+                    // Reiniciar después de 3 segundos
+                    setTimeout(() => {
+                        display.style.opacity = '0';
+                        display.style.color = '#4D97FF';
+                        display.style.animation = '';
+                        button.textContent = '⏱️ Iniciar Cronómetro';
+                    }, 3000);
+                }
+            }, 1000);
+        }
+
+        // Tips de Scratch interactivos
+        function showScratchTip(topic) {
+            const tooltip = document.getElementById('scratch-tooltip');
+            const tips = {
+                'variables': '💾 Las variables almacenan información que puede cambiar, como puntuación o vidas del jugador.',
+                'eventos': '⚡ Los eventos son acciones que activan código, como hacer clic en un sprite o presionar una tecla.',
+                'control': '🔄 Los bloques de control manejan repeticiones y decisiones, como bucles y condicionales.'
+            };
+            
+            tooltip.textContent = tips[topic];
+            tooltip.style.opacity = '1';
+            tooltip.style.backgroundColor = topic === 'variables' ? '#4D97FF' : 
+                                           topic === 'eventos' ? '#FF8C1A' : '#9333EA';
+            
+            setTimeout(() => {
+                tooltip.style.opacity = '0';
+            }, 4000);
+        }
+
+        // Efectos al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            
+            // Animación de entrada escalonada
+            const elements = document.querySelectorAll('.animate-fade-in');
+            elements.forEach((el, index) => {
+                el.style.animationDelay = (index * 0.2) + 's';
+            });
+            
+            // Efecto de hover en todos los elementos interactivos
+            document.querySelectorAll('.interactive-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                });
+            });
+        });
+
+        // Scroll reveal animations
+        function revealOnScroll() {
+            const elements = document.querySelectorAll('[class*="animate-"]');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('animate-fade-in');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+    </script>
+
+    <style>
+        @keyframes ping {
+            75%, 100% {
+                transform: scale(1.1);
+                opacity: 0;
+            }
+        }
+    </style>
 
 </body>
 </html>
